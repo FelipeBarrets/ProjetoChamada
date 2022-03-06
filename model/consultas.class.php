@@ -14,6 +14,28 @@ class Consultas
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_ASSOC);
 	}
+    
+    public function listarChamadas(){
+		$conMySQL = DB::conexao();
+
+        $stringSQL = "SELECT dataChamada FROM chamadas group by dataChamada;";     
+
+        //echo $stringSQL;
+
+        $sql = $conMySQL->prepare($stringSQL);
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+	}
+    
+      public function buscaChamada($dataChamada){
+		$conMySQL = DB::conexao();
+
+        $stringSQL = "select * from chamadas where dataChamada = :dataChamada";     
+        $sql = $conMySQL->prepare($stringSQL);            
+        $sql->bindValue(":dataChamada", $dataChamada);        
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+	}
 	
 	public function validacao($usuario, $senha){
 		$conMySQL = DB::conexao();
@@ -125,12 +147,12 @@ class Consultas
             return false;
         }
     }
-    public function inserirChamada($nome, $frequencia, $estudando, $participando, $atuando){
+    public function inserirChamada($nome, $frequencia, $estudando, $participando, $atuando, $dataChamada){
         if ($this) {
             $conMySQL = DB::conexao();
             
             $stringSQL = "INSERT INTO  chamadas
-                          VALUES ('', :nomeal, :frequencia, :estudando, :participando, :atuando);";
+                          VALUES ( :nomeal, :frequencia, :estudando, :participando, :atuando,:dataChamada);";
             $sql = $conMySQL->prepare($stringSQL);
             //$sql->bindValue(":codigo", $this->getCodigo());
             $sql->bindValue(":nomeal", $nome);
@@ -138,6 +160,7 @@ class Consultas
             $sql->bindValue(":estudando", $estudando);
             $sql->bindValue(":participando", $participando);
             $sql->bindValue(":atuando", $atuando);
+            $sql->bindValue(":dataChamada", $dataChamada);
             
             
             //echo $stringSQL;

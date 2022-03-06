@@ -108,7 +108,7 @@ session_start();
 
                 function chamada()
                 {
-                    location.href = "chamada.php";
+                    location.href = "listaChamadas.php";
                 }
                 function relatorio()
                 {

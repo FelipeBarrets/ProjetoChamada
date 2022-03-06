@@ -66,7 +66,7 @@ and open the template in the editor.
             
             function chamada()
             {
-                location.href = "chamada.php";
+                location.href = "listaChamadas.php";
             }
             function relatorio()
             {

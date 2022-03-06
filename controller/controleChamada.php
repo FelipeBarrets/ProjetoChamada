@@ -2,7 +2,10 @@
 
         $consulta = new Consultas();
         $nomes = $consulta->listarNomes();
-        $dataChamada= date("d/m/Y", time());
+        $dataChamada= date("Y/m/d", time());
+        
+        //$frequencia = $_POST["dataChamada"];
+        
         //$consulta->criarChamada($dataChamada);
          $i= 0;
         foreach ($nomes as $item) {
